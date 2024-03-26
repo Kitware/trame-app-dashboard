@@ -1,7 +1,7 @@
 trame:
   cmd:
     - python
-    - /deploy/us-population.py
+    - /deploy/us_population.py
     - --host
     - ${host}
     - --port

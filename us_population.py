@@ -67,7 +67,7 @@ TABLE_HEADER = [
 
 COMPONENTS_AND_2010 = [*COMPONENTS, "2010"]
 
-DATA_FILE = str(Path(__file__).with_name("us-population.csv").resolve())
+DATA_FILE = str(Path(__file__).with_name("us_population.csv").resolve())
 
 # -----------------------------------------------------------------
 # Helper methods using various libraries

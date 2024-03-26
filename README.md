@@ -1,6 +1,10 @@
 # Dashboard example with trame
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Kitware/trame-app-dashboard/HEAD?labpath=example.ipynb)
+
 The current example illustrate trame usage when building a reactive dashboard using altair, plotly, matplotlib and vuetify.
+
+![Dashboard](./trame-dashboard.png)
 
 # Build the image
 
@@ -25,6 +29,6 @@ caprover deploy
 That app could also be deployed by running the following set of commands
 
 ```bash
-tar -cvf trame-app-dashboard.tar captain-definition Dockerfile app.py setup
+tar -cvf trame-app-dashboard.tar captain-definition Dockerfile us_population.py us_population.csv setup
 caprover deploy -t trame-app-dashboard.tar
 ```
