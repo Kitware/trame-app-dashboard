@@ -1,0 +1,15 @@
+trame
+trame-components 
+trame-markdown
+trame-matplotlib
+trame-plotly
+trame-vega
+trame-vuetify
+
+pandas
+numpy
+altair
+matplotlib
+mpld3
+plotly
+vega

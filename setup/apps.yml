@@ -1,0 +1,11 @@
+trame:
+  cmd:
+    - python
+    - /deploy/us-population.py
+    - --host
+    - ${host}
+    - --port
+    - ${port}
+    - --authKey
+    - ${secret}
+    - --server
