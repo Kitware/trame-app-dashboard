@@ -225,9 +225,10 @@ def make_heatmap(
 
 
 # Line - matplotlib
-def make_line(input_years, input_population, width, height, dpi):
-    w = (width - 10) / dpi
-    h = (height - 10) / dpi
+def make_line(input_years, input_population, width, height):
+    default_dpi = 100
+    w = (width - 10) / default_dpi
+    h = (height - 10) / default_dpi
     plt.figure(figsize=(w, h), layout="compressed")
     plt.plot(np.asarray(input_years, int), np.asarray(input_population, int))
     fig = plt.gcf()
@@ -305,9 +306,7 @@ class UsPopulation:
             return
 
         self.last_computed_component = active_selection
-        self.df_selected_cmp_or_yr = self.df_raw[
-            self.df_raw.year == active_selection
-        ]
+        self.df_selected_cmp_or_yr = self.df_raw[self.df_raw.year == active_selection]
         self.df_selected_sorted = self.df_selected_cmp_or_yr.sort_values(
             by="population", ascending=False
         )
@@ -325,14 +324,10 @@ class UsPopulation:
     def update_gains_losses(self, active_selection, **kwargs):
         self._calculate_dataframes(active_selection)
         self.ctrl.gains_update(
-            make_gains_loss(
-                self.df_difference_sorted, active_selection, gain=True
-            )
+            make_gains_loss(self.df_difference_sorted, active_selection, gain=True)
         )
         self.ctrl.losses_update(
-            make_gains_loss(
-                self.df_difference_sorted, active_selection, gain=False
-            )
+            make_gains_loss(self.df_difference_sorted, active_selection, gain=False)
         )
 
     @change("active_selection")
@@ -363,9 +358,7 @@ class UsPopulation:
         self.ctrl.below_view_update(donut_below)
 
     @change("active_selection", "color_theme", "map_size")
-    def update_choropleth(
-        self, active_selection, color_theme, map_size, **kwargs
-    ):
+    def update_choropleth(self, active_selection, color_theme, map_size, **kwargs):
         self._calculate_dataframes(active_selection)
         if map_size is None:
             return
@@ -382,9 +375,7 @@ class UsPopulation:
         self.state.figure_ready = True
 
     @change("active_selection", "color_theme", "heatmap_size")
-    def update_heatmap(
-        self, active_selection, color_theme, heatmap_size, **kwargs
-    ):
+    def update_heatmap(self, active_selection, color_theme, heatmap_size, **kwargs):
         self._calculate_dataframes(active_selection)
         if heatmap_size is None:
             return
@@ -405,14 +396,13 @@ class UsPopulation:
         if self.line != None:
             plt.close(self.line)
         if line_size is None:
-            self.line = make_line(YEARS, self.population, 300, 300, 192)
+            self.line = make_line(YEARS, self.population, 300, 300)
             self.ctrl.line_view_update(self.line)
             return
         size = line_size.get("size")
         width = size.get("width")
         height = size.get("height")
-        dpi = line_size.get("dpi")
-        self.line = make_line(YEARS, self.population, width, height, dpi)
+        self.line = make_line(YEARS, self.population, width, height)
         self.ctrl.line_view_update(self.line)
 
     def _build_ui(self):
@@ -482,9 +472,7 @@ class UsPopulation:
                                 classes="fill-height",
                                 style="min-height: max(200px, 40vh)",
                             ):
-                                vuetify3.VCardTitle(
-                                    "Population {{ active_selection }}"
-                                )
+                                vuetify3.VCardTitle("Population {{ active_selection }}")
                                 with html.Div(style="height: calc(100% - 4rem);"):
                                     with trame.SizeObserver("map_size"):
                                         self.ctrl.choropleth_view_update = (
