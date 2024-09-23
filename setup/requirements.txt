@@ -1,6 +1,6 @@
 trame
 trame-components 
-trame-markdown
+trame-markdown>=3.0.2
 trame-matplotlib
 trame-plotly
 trame-vega

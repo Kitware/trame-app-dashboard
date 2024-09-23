@@ -12,6 +12,9 @@ from trame.decorators import TrameApp, change
 from trame.ui.vuetify3 import SinglePageLayout
 from trame.widgets import html, markdown, matplotlib, plotly, trame, vega, vuetify3
 
+# Force light theme in md content rather than auto
+markdown.theme_light()
+
 DEFAULT_DPI = 100
 
 # -----------------------------------------------------------------
